@@ -1,47 +1,52 @@
-# LiteBase Kullanım Kılavuzu
+# LiteBase: Basit Bir PHP Tabanlı Veritabanı Sistemi
 
-## LiteBase Nedir?
+LiteBase, PHP tabanlı basit bir veritabanı sistemidir. Dosya tabanlı bir yaklaşım kullanarak verileri saklar ve temel veritabanı işlevlerini sağlar.
 
-LiteBase, basit ve hafif bir dosya tabanlı veritabanı sistemidir. PHP projeleri için ideal olan LiteBase, veri depolama ve yönetim ihtiyaçlarını karşılar. LiteBase, hızlı bir şekilde kurulabilir ve kullanılabilir.
+## Özellikler
+
+- Basit veritabanı işlevleri: LiteBase, veri saklama, alma, güncelleme ve silme gibi temel veritabanı işlevlerini sağlar.
+- Dosya tabanlı veri saklama: Veriler, dosya tabanlı bir yaklaşımla saklanır, bu da kurulumun ve kullanımın kolay olmasını sağlar.
+- Hata yönetimi: LiteBase, hata durumlarını ele alarak kullanıcıya geri bildirim sağlar.
 
 ## Kurulum
 
-LiteBase'i kurmak için aşağıdaki adımları izleyin:
-
-1. **İndirme**: LiteBase'in en son sürümünü [buradan](https://example.com/litebase/latest) indirin.
-
-2. **Dosyaları Çıkarma**: İndirdiğiniz dosyayı istediğiniz bir klasöre çıkartın.
-
-3. **Kullanıma Başlama**: LiteBase'i kullanmaya başlamak için, PHP projesinin kodlarına LiteBase'i dahil edin ve gerekli fonksiyonları kullanmaya başlayın.
+1. LiteBase dosyalarını indirin.
+2. Dosyaları sunucunuza yükleyin.
+3. `litebase/data/` dizinini oluşturun ve yazma izinlerini (`chmod 0777`) ayarlayın.
 
 ## Kullanım
 
-LiteBase'i kullanmak için aşağıdaki adımları izleyin:
+LiteBase, aşağıdaki temel işlevlerle kullanılabilir:
 
-1. **Veritabanı Oluşturma**: `litebase_create` fonksiyonu ile yeni bir veritabanı oluşturun.
+- `litebase_get`: Belirli bir tablodan veri almak için kullanılır.
+- `litebase_insert`: Veritabanına yeni veri eklemek için kullanılır.
+- `litebase_delete`: Veritabanından veri silmek için kullanılır.
+- `litebase_getLine`: Belirli bir satırı almak için kullanılır.
+- `litebase_dump`: Veritabanı tablosunun tamamını döndürmek için kullanılır.
 
-2. **Veri Ekleme**: `litebase_insert` fonksiyonu ile veritabanına yeni veri ekleyin.
-
-3. **Veri Alma**: `litebase_get` fonksiyonu ile veritabanından veri alın.
-
-4. **Veri Silme**: `litebase_delete` fonksiyonu ile veritabanından veri silin.
-
-5. **Güncelleme (Opsiyonel)**: Var olan verileri güncellemek için `litebase_update` gibi fonksiyonları kullanabilirsiniz.
-
-## Örnek Kod
+## Örnek Kullanım
 
 ```php
-// LiteBase'i kullanmak için gerekli dosyayı dahil edin
-include('litebase.php');
+<?php
+// LiteBase örnek kullanım
 
-// Yeni bir veritabanı oluşturun
-litebase_create('my_database');
+// LiteBase kütüphanelerini dahil etme
+include 'litebase.php';
 
-// Veri ekleme
-litebase_insert('my_database', 'hello world');
+// Veritabanı dosyası ve tablo adı
+$database = 'my_database';
+$table = 'my_table';
 
-// Veri alma
-$data = litebase_get('my_database', 'hello', 0);
+// Veriyi eklemek için örnek
+$data = 'John Doe,30,New York';
 
-// Veri silme
-litebase_delete('my_database', 'hello', 0);
+// Veriyi ekleyin
+$result = litebase_insert($table, $data);
+
+// Sonucu kontrol etme
+if ($result) {
+    echo "Veri başarıyla eklendi.";
+} else {
+    echo "Veri eklenirken bir hata oluştu.";
+}
+?>
